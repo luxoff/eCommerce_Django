@@ -16,8 +16,18 @@ def home(request):
 
 def cart(request):
     page_title = 'Корзина — Інтернет-магазин Дмитра Гурського'
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, is_complete=False)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+
     context = {
-        'page_title': page_title
+        'page_title': page_title,
+        'items': items,
+        'order': order,
     }
     return render(request, 'store/cart.html', context)
 
