@@ -13,7 +13,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=100, null=True)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=9, decimal_places=2)
     image = models.ImageField(null=True, blank=True)
     is_digital = models.BooleanField(default=False, null=True, blank=False)
 

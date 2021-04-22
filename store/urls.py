@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
 
     path('updateItem/', views.updateItem, name="update_item"),
     path('process_order/', views.processOrder, name="process_order"),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

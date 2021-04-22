@@ -3,7 +3,6 @@ from .models import *
 
 
 def cookieCart(request):
-
     try:
         cart = json.loads(request.COOKIES['cart'])
     except:
@@ -17,7 +16,7 @@ def cookieCart(request):
     for i in cart:
 
         try:
-            if (cart[i]['quantity'] > 0):
+            if cart[i]['quantity'] > 0:
                 cartItems += cart[i]['quantity']
 
                 product = Product.objects.get(id=i)
@@ -34,7 +33,7 @@ def cookieCart(request):
                 }
                 items.append(item)
 
-                if product.digital == False:
+                if not product.digital:
                     order['shipping'] = True
         except:
             pass
@@ -76,7 +75,7 @@ def guestOrder(request, data):
     )
 
     for item in items:
-        product = Product.objects.get(id=item['id'])
+        product = Product.objects.get(id=item['Id'])
         orderItem = OrderItem.objects.create(
             product=product,
             order=order,

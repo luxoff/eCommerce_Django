@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 
+from django.contrib.auth import logout
 from django.shortcuts import render
 from django.http import JsonResponse
 
@@ -107,7 +108,7 @@ def processOrder(request):
         order.is_complete = True
     order.save()
 
-    if order.shipping == True:
+    if order.shipping:
         ShippingAddress.objects.create(
             customer=customer,
             order=order,
@@ -118,3 +119,4 @@ def processOrder(request):
         )
 
     return JsonResponse('Payment submitted..', safe=False)
+
