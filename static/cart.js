@@ -61,4 +61,3 @@ function addCookieItem(prodId, action){
 
 	location.reload()
 }
-
